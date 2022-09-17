@@ -41,7 +41,7 @@ const Navbar = () => {
           className='flex items-center gap-x-0'
         >
           <h1 className='text-xl mb-0'>
-            <span className='text-orange'>Post</span>erly
+            <span className='text-red-500'>Reddit</span>
           </h1>
         </Link>
         <div className='flex align-middle space-x-4'>
