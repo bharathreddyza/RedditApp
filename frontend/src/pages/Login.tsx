@@ -83,7 +83,7 @@ const Login = () => {
           </Form>
         </Formik>
         <p className='text-xs'>
-          New to Posterly?{' '}
+          New to Reddit?{' '}
           <Link
             className='font-bold text-blue-500 hover:text-blue-400'
             to='/signup'

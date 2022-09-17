@@ -96,7 +96,7 @@ const Signup = () => {
           </Form>
         </Formik>
         <p className='text-xs'>
-          Already a Posterly member?{' '}
+          Already a reddit member?{' '}
           <Link
             className='font-bold text-blue-500 hover:text-blue-400'
             to='/login'
