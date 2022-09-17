@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-200;
+  }
+  main {
+    @apply md:max-w-2xl md:mx-auto my-8;
+  }
+  h1 {
+    @apply text-3xl font-bold mb-2;
+  }
+  h2 {
+    @apply text-2xl font-bold mb-2;
+  }
+  h3 {
+    @apply text-xl font-bold mb-2;
+  }
+  h4 {
+    @apply text-lg font-bold mb-2;
+  }
+  label {
+    @apply font-semibold;
+  }
+  li {
+    @apply list-none;
+  }
+}

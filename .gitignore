@@ -1,0 +1,6 @@
+frontend/coverage
+frontend/.nyc_output
+*build
+*node_modules
+.DS_Store
+*.env
