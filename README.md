@@ -1,18 +1,10 @@
-# Reddit Fullstack App
-
-- **Authentication**: signup, login, logout, and persistence
-- **Posts**: adding and deleting posts
-- **Comments & replies**: Adding and deleting comments & replies
-- **Votes**: upvoting and downvoting posts
+# Reddit App
 
 Frontend:
 
 - React
 - TypeScript
 - Tailwind CSS
-- react-router-dom
-- formik
-- yup
 
 Backend:
 
@@ -27,4 +19,4 @@ Testing:
 
 Deployment:
 
-- Vercel
+- heroku
