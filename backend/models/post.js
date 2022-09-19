@@ -39,6 +39,7 @@ const postSchema = mongoose.Schema(
     title: { type: String, required: true },
     body: { type: String },
     url: { type: String },
+    video:{type: String},
     comments: [commentSchema],
     upvotes: [
       {

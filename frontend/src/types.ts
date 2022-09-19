@@ -4,6 +4,7 @@ export type Post = {
   user: string;
   url?: string;
   title: string;
+  video: string;
   body: string;
   comments: Comment[];
   upvotes: string[];

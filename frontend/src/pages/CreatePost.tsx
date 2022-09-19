@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState,useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { Formik, Form } from "formik";
 import TextInput from "../components/TextInput";
@@ -20,19 +20,54 @@ type FormValues = {
   title: string;
   body: string;
   url: string;
+  video:string
 };
 
 const CreatePost = () => {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [video, setVideo] = useState< any>();
+  const videoRef = useRef<any>();
+ 
+  const initialValues: FormValues = {
+    title: "",
+    body: "",
+    url: "",
+    video:""
+  };
+  const handleFileUpload = async(values: FormValues)=>{
+     const data = new FormData()
+    console.log('tostrinf',video)
+data.append("file", video)  
+data.append("upload_preset", "udld5n25")
+data.append("cloud_name","breellz")
+fetch("https://api.cloudinary.com/v1_1/dgxz1xw8c/video/upload",{
+method:"post",
+body: data
+})
+.then(resp => resp.json())
+.then(data => {
+//  initialValues.video=data.url
+ console.log("------",data.url,values)
+  
+ console.log(values)
 
+   axios.post("/api/posts", {body:values.body,title:values.title,url:values.url, video:data.url});
+      history.push("/");
+   
+})
+.catch(err => console.log(err))
+
+  }
   const handleSubmit = async (values: FormValues) => {
     try {
+      console.log(values)
       setLoading(true);
       setError("");
-      await axios.post("/api/posts", values);
-      history.push("/");
+       await handleFileUpload(values)
+       
+     
     } catch (e: any) {
       setLoading(false);
       const { data } = e.response;
@@ -40,11 +75,7 @@ const CreatePost = () => {
     }
   };
 
-  const initialValues: FormValues = {
-    title: "",
-    body: "",
-    url: "",
-  };
+ 
   return (
     <main className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <section className="max-w-md w-full space-y-8">
@@ -74,6 +105,51 @@ const CreatePost = () => {
               type="text"
               placeholder="URL (optional)"
             />
+           
+         <div
+         
+            className={
+              video
+                ? " w-96   rounded-md  h-64 items-center justify-center flex"
+                : "border-2 dark:border-gray-600  w-96 border-dashed border-borderWhiteGray rounded-md mt-8   h-64 items-center justify-center flex"
+            }
+          >
+            {video ? (
+              <>
+                (
+                  <video
+                     onClick={() => {
+                      videoRef!.current?.click();
+                    }}
+                    controls
+                    src={URL.createObjectURL(video)}
+                    className="h-full rounded-md"
+                  />
+                )
+              </>
+            ) : (
+              <input
+              id="video"
+              ref={videoRef}
+              name="video"
+            type="file"
+            className=""
+            placeholder="Video"
+            // ref={videoRef}
+            accept= "video/*" 
+            onChange={(e) => {
+              if (!e.target.files || e.target.files.length === 0) {
+                // you can display the error to the user
+                console.error("Select a file");
+                return;
+              }
+              setVideo(e.target.files[0]);
+              // console.log(e.target.files[0]);
+            }}
+          />
+            )}
+                      </div>
+
             <SubmitButton
               data-testid="create-post-btn"
               loading={loading}

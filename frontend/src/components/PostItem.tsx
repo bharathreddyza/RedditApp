@@ -40,8 +40,14 @@ const PostItem = ({ post, removePost, isPostPage }: Props) => {
             <Link to={`/posts/${post._id}`}>{post.title}</Link>
           )}
         </h2>
+       { post.video && (
+          <video className=" w-1/2 justify-center" src={post.video} controls></video>
+        )}
         {isPostPage && post.body && (
           <p className="mb-2 border py-2 px-1 rounded">{post.body}</p>
+        )}
+         {isPostPage && post.video && (
+          <video className=" w-1/2 justify-center" src={post.video} controls></video>
         )}
         <Flex className="justify-between">
           <Link data-testid="comments-link" to={`/posts/${post._id}`}>
